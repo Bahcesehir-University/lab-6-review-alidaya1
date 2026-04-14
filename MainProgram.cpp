@@ -1,4 +1,4 @@
-// ============================================================
+/// ============================================================
 // Lab W7: C++ OOP Review - Classes, Encapsulation, Strings,
 //         Copy Constructors, Operator Overloading
 // Course: Object-Oriented Programming
@@ -39,7 +39,7 @@ public:
     // TODO 1a: Default constructor
     // Set name to "Unknown", id to 0, gpa to 0.0
     Student() {
-        // YOUR CODE HERE
+        name = "Unknown";
     }
 
     // TODO 1b: Parameterized constructor
@@ -51,13 +51,15 @@ public:
     // TODO 1c: Copy constructor
     // Create a deep copy of another Student object
     Student(const Student& other) {
-        // YOUR CODE HERE
+        name  = other.name ;
+        id = other.id;
+        gpa = other.gpa;
     }
 
     // TODO 1d: Destructor
     // Print: "Student [name] destroyed"
     ~Student() {
-        // YOUR CODE HERE
+        cout << "Student t"<<name<<"destroyed"<<end;
     }
 
     // ----- Task 2: Getters (Encapsulation) -----
@@ -65,7 +67,7 @@ public:
     // TODO 2a: Getter for name
     string getName() const {
         // YOUR CODE HERE
-        return "";
+        return name;
     }
 
     // TODO 2b: Getter for id
@@ -86,6 +88,9 @@ public:
     // Name must not be empty. If empty, keep current name.
     void setName(string n) {
         // YOUR CODE HERE
+        if (!n.empty()){
+            
+        }
     }
 
     // TODO 3b: Setter for GPA
@@ -93,6 +98,9 @@ public:
     // If out of range, keep current GPA.
     void setGpa(double g) {
         // YOUR CODE HERE
+        if ( g>= 0.0 && g <= 4.0){
+            gpa = g;
+        }
     }
 
     // ----- Task 4: String Operation -----
@@ -102,7 +110,12 @@ public:
     // Hint: loop through each character and use toupper()
     string getFormattedName() const {
         // YOUR CODE HERE
-        return "";
+        string result = name;
+        for (int i = 0 ; i <result.lenght() ; i++){
+            result[i] = toupper(result[i]);
+        }
+        
+        return;
     }
 
     // ----- Task 5: Operator Overloading -----
@@ -111,14 +124,14 @@ public:
     // Two students are equal if they have the same id
     bool operator==(const Student& other) const {
         // YOUR CODE HERE
-        return false;
+        return id == other.id;
     }
 
     // TODO 5b: Less-than operator (<)
     // Compare by GPA (lower GPA = "less than")
     bool operator<(const Student& other) const {
         // YOUR CODE HERE
-        return false;
+        return gpa < other.gpa;
     }
 
     // TODO 5c: Stream insertion operator (<<)
@@ -138,14 +151,21 @@ public:
 // Version 1: Takes two Student references, returns the one with higher GPA
 Student findBestStudent(const Student& a, const Student& b) {
     // YOUR CODE HERE
-    return a;
-}
+    if (b < a){
+        return a;
+    }
+    return b;
 
 // Version 2: Takes an array of Students and its size, returns the one with highest GPA
 Student findBestStudent(Student arr[], int size) {
     // YOUR CODE HERE
-    return arr[0];
-}
+    Student best = arr[0];
+    
+    for (int i = 1; i < size; i++){
+        if (best < arr[i]){
+            best = arr[i];
+        }
+    }
 
 // ================================
 // MAIN FUNCTION
